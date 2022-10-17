@@ -178,7 +178,7 @@ namespace ORB_SLAM3 {
             cout << "\t-Computed rectification maps" << endl;
         }
 
-        cout << "----------------------------------" << endl;
+        cout << "---------------------------------" << endl;
     }
 
     void Settings::readCamera1(cv::FileStorage &fSettings) {
