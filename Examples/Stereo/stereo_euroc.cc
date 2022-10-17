@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     const int num_seq = (argc-3)/2;
     cout << "num_seq = " << num_seq << endl;
     bool bFileName= (((argc-3) % 2) == 1);
-    string file_name;
+    string file_name="";
     if (bFileName)
     {
         file_name = string(argv[argc-1]);
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
     cout.precision(17);
 
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::STEREO, true);
+    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::STEREO, false,0,"",file_name);
 
     cv::Mat imLeft, imRight;
     for (seq = 0; seq<num_seq; seq++)

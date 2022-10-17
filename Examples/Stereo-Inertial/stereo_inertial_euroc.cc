@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     }
 
     // Load all sequences:
-    int seq;
+    //int seq;
     vector< vector<string> > vstrImageLeft;
     vector< vector<string> > vstrImageRight;
     vector< vector<double> > vTimestampsCam;
@@ -78,8 +78,11 @@ int main(int argc, char **argv)
     nImu.resize(num_seq);
 
     int tot_images = 0;
-    for (seq = 0; seq<num_seq; seq++)
+    
+    
+    for (int seq = 0; seq<num_seq; seq++)
     {
+	cout << "I'm here \n";
         cout << "Loading images for sequence " << seq << "...";
 
         string pathSeq(argv[(2*seq) + 3]);
@@ -88,7 +91,7 @@ int main(int argc, char **argv)
         string pathCam0 = pathSeq + "/mav0/cam0/data";
         string pathCam1 = pathSeq + "/mav0/cam1/data";
         string pathImu = pathSeq + "/mav0/imu0/data.csv";
-
+	//cout << "path:" << pathCam0 << "," << pathTimeStamps << std::endl;
         LoadImages(pathCam0, pathCam1, pathTimeStamps, vstrImageLeft[seq], vstrImageRight[seq], vTimestampsCam[seq]);
         cout << "LOADED!" << endl;
 
@@ -112,6 +115,7 @@ int main(int argc, char **argv)
             first_imu[seq]++;
         first_imu[seq]--; // first imu measurement to be considered
     }
+    //cout << "I'm here2 \n";
 
     // Read rectification parameters
     cv::FileStorage fsSettings(argv[2], cv::FileStorage::READ);
@@ -132,7 +136,7 @@ int main(int argc, char **argv)
     ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::IMU_STEREO, false);
 
     cv::Mat imLeft, imRight;
-    for (seq = 0; seq<num_seq; seq++)
+    for (int seq = 0; seq<num_seq; seq++)
     {
         // Seq loop
         vector<ORB_SLAM3::IMU::Point> vImuMeas;

@@ -179,7 +179,7 @@ public:
 #ifdef REGISTER_TIMES
     void LocalMapStats2File();
     void TrackStats2File();
-    void PrintTimeStats();
+    void PrintTimeStats(const std::string prefix = "");
 
     vector<double> vdRectStereo_ms;
     vector<double> vdResizeImage_ms;

@@ -260,7 +260,7 @@ void Tracking::TrackStats2File()
     f.close();
 }
 
-void Tracking::PrintTimeStats()
+void Tracking::PrintTimeStats(const std::string prefix)
 {
     // Save data in files
     TrackStats2File();
@@ -268,7 +268,7 @@ void Tracking::PrintTimeStats()
 
 
     ofstream f;
-    f.open("ExecMean.txt");
+    f.open("ExecMean" + prefix + ".txt");
     f << fixed;
     //Report the mean and std of each one
     std::cout << std::endl << " TIME STATS in ms (mean$\\pm$std)" << std::endl;
@@ -298,7 +298,7 @@ void Tracking::PrintTimeStats()
 
     average = calcAverage(vdORBExtract_ms);
     deviation = calcDeviation(vdORBExtract_ms, average);
-    std::cout << "ORB Extraction: " << average << "$\\pm$" << deviation << std::endl;
+    std::cout << "ORB Extraction: #" << vdORBExtract_ms.size() << "," << average << "$\\pm$" << deviation << std::endl;
     f << "ORB Extraction: " << average << "$\\pm$" << deviation << std::endl;
 
     if(!vdStereoMatch_ms.empty())
@@ -324,8 +324,8 @@ void Tracking::PrintTimeStats()
 
     average = calcAverage(vdLMTrack_ms);
     deviation = calcDeviation(vdLMTrack_ms, average);
-    std::cout << "LM Track: " << average << "$\\pm$" << deviation << std::endl;
-    f << "LM Track: " << average << "$\\pm$" << deviation << std::endl;
+    std::cout << "LM Track: #" << vdLMTrack_ms.size() << "," << average << "$\\pm$" << deviation << std::endl;
+    f << "LM Track: #" << vdLMTrack_ms.size() << "," << average << "$\\pm$" << deviation << std::endl;
 
     average = calcAverage(vdNewKF_ms);
     deviation = calcDeviation(vdNewKF_ms, average);
@@ -359,8 +359,8 @@ void Tracking::PrintTimeStats()
 
     average = calcAverage(mpLocalMapper->vdLBA_ms);
     deviation = calcDeviation(mpLocalMapper->vdLBA_ms, average);
-    std::cout << "LBA: " << average << "$\\pm$" << deviation << std::endl;
-    f << "LBA: " << average << "$\\pm$" << deviation << std::endl;
+    std::cout << "LBA: " << mpLocalMapper->vdLBA_ms.size() << ","  << average << "$\\pm$" << deviation << std::endl;
+    f << "LBA: " << mpLocalMapper->vdLBA_ms.size() << ","  << average << "$\\pm$" << deviation << std::endl;
 
     average = calcAverage(mpLocalMapper->vdKFCulling_ms);
     deviation = calcDeviation(mpLocalMapper->vdKFCulling_ms, average);
